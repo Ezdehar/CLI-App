@@ -16,7 +16,7 @@ connection.connect(function(err) {
 	start();
 });
 
-function start(err, res) {
+function start(err, results) {
 	inquirer
 		.prompt([
 		{
@@ -24,12 +24,6 @@ function start(err, res) {
 	     name: "choice",
 	     message: "What is the ID of the product you would like to buy?",
 	     choices: ["1","2","3","4","5","6","7","8","9","10"]
-		    
-				// for (var i = 0; i < res.length; i++) {
-				// 	console.log("Item_id: " + res[i].item_id + " || Product_name: " + res[i].product_name + " || Price: " + res[i].price);
-		
-				// return choiceArray;
-				// };	
 		},
         {
 	     name: "category",
@@ -47,11 +41,12 @@ function start(err, res) {
 	 
 	 connection.query("SELECT * FROM products", function(err, results) {
 		
-		  var confirmItem;	
-
-		  	for (var i = 0; i < results.length; i++) {
-		     if (results[i].product_name === answer.confirm) {
-           		 confirmItem = results[i];
+		  var choiceArray = ["1","2","3","4","5","6","7","8","9","10"];
+	     		for (var i = 0; i < results.length; i++) {
+	     			choiceArray.push(results[i].product);
+	    		
+		     if (results[i].product === answer.choice) {
+           		 choiceArray = res[i];
 
 		      		console.log(results[i].product);
 		      }
@@ -62,19 +57,15 @@ function start(err, res) {
 			}
 		})
 	})
-console.log(res);
+console.log(results);
 connection.end();
 }
 
 
 
 
-
-
-
-
-
-
+	     	
+	         
 
 
 
