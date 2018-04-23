@@ -16,7 +16,7 @@ connection.connect(function(err) {
 	start();
 });
 
-function start(err, results) {
+function start(err, res) {
 	inquirer
 		.prompt([
 		{
@@ -36,37 +36,58 @@ function start(err, results) {
 	     message: "Place order?",
 	     choices: ["YES", "NO"]
 	    }
-	])
-	.then(function(answer) {
-	 
-	 connection.query("SELECT * FROM products", function(err, results) {
-		
-		  var choiceArray = ["1","2","3","4","5","6","7","8","9","10"];
-	     		for (var i = 0; i < results.length; i++) {
-	     			choiceArray.push(results[i].product);
-	    		
-		     if (results[i].product === answer.choice) {
-           		 choiceArray = res[i];
-
-		      		console.log(results[i].product);
-		      }
-			  else {
-			  	cancelOrder();
-			  		console.log("Insufficient quantity!");
-			  }
+	]).then(function(resp) {
+	 	var query = connection.query(
+	 		"SELECT * FROM products",
+	 		function(err, res){
+	 		if(err) throw err;	
+	 		var listOfProducts = []
+	 		for(var i = 0; i < res.length; i++) {
+	 			console.log(res[i].id + ": " + res[i].productName);
+				console.log(res[i].description);
+				listOfItems.push(res[i].productName);
 			}
-		})
-	})
-console.log(results);
+	 		inquirer.prompt([
+				{
+					name: "price",
+					message: "price",
+					choices: listOfItems
+				}
+	 	]).then(ans => {
+	 		var cancelOrder = cancelOrder(resp.choice);
+	 		var CostofPurchase = CostOfPurchase(resp.choice);
+	 		if (answer.chioce === res[i].productName) {
+	 			postCostOfPurchase(resp.choice)
+	 			console.log(price)
+	 			console.log(res[i].products);
+	 		}else {
+			   	cancelOrder();
+			  	console.log("Insufficient quantity!");	
+			   	}
+	 	});	
+console.log(res);
 connection.end();
+	})
+});
 }
+//"1","2","3","4","5","6","7","8","9","10"
 
+// //new Promise(function(resolve) {
+//   console.log('first');
+//   resolve();
+//   console.log('second');
+// }).then(function() {
+	//.then is the value called by console.resolve (the third line)
+//   console.log('third');
+// });
 
-
-
+//Call var before declaring in the constructor function 
+//Familiar with how to hit api keys and how to take environment variables  defined and use them in my scripts
 	     	
 	         
+//choiceArray.push(res[i].answer);
 
+	    //		}
 
 
 
