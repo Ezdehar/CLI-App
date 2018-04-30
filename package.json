@@ -1,9 +1,10 @@
 {
   "name": "bamazoncustomer",
   "version": "1.0.0",
-  "description": "",
+  "description": "Image of node.js !(/Users/ezdeharjaber/Documents/cwru/CLI-App/Screenshot.png)",
   "main": "bamazonCustomer.js",
   "dependencies": {
+    "console.table": "^0.10.0",
     "inquirer": "^5.2.0",
     "json-package": "^1.1.2",
     "mysql": "^2.15.0",
@@ -15,5 +16,13 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ezdehar/CLI-App.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ezdehar/CLI-App/issues"
+  },
+  "homepage": "https://github.com/Ezdehar/CLI-App#readme"
 }
